@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 
 function AddCategory() {
   const [categories, setCategories] = useState([]);
@@ -25,25 +26,29 @@ function AddCategory() {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <form onSubmit={handleSubmit}>
-          <h2>ENTER A NEW CATEGORY</h2>
-          <div className="input-group">
-            <input
-              onChange={handleTextChange}
-              type="text"
-              placeholder="Enter a Category"
-              value={newCategory}
-            />
-          </div>
-          <button className="btn btn-primary" type="submit">
-            submit
-          </button>
-          {message && <div className="message">{message}</div>}
-        </form>
+    <>
+      <div className="container">
+        <div className="card">
+          <form onSubmit={handleSubmit}>
+            <h2>ENTER A NEW CATEGORY</h2>
+            <div className="input-group">
+              <input
+                onChange={handleTextChange}
+                type="text"
+                placeholder="Enter a Category"
+                value={newCategory}
+              />
+            </div>
+            <div className="text-center">
+              <button className="btn btn-primary" type="submit">
+                submit
+              </button>
+            </div>
+            {message && <div className="message">{message}</div>}
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

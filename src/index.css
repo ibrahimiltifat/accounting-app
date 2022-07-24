@@ -31,7 +31,6 @@ header {
   align-items: center;
   margin-bottom: 30px;
 }
-
 .card {
   background-color: #fff;
   color: #333;
@@ -39,6 +38,8 @@ header {
   padding: 40px 50px;
   margin: 20px 0;
   position: relative;
+}
+.text-center {
   text-align: center;
 }
 
@@ -51,6 +52,14 @@ header {
   font-size: 22px;
   font-weight: 600;
   text-align: center;
+}
+.form {
+  display: flex;
+  align-content: space-between;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  /* background-color: red; */
 }
 
 .rating {
@@ -107,6 +116,10 @@ header {
   border: 1px solid #ccc;
   padding: 8px 10px;
   border-radius: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.category-input {
 }
 
 input {
@@ -154,7 +167,7 @@ input:focus {
   width: 100px;
   height: 40px;
   cursor: pointer;
-  margin-top: 20px;
+  margin: 20px 5px;
 }
 
 .btn-primary {
@@ -227,6 +240,6 @@ input:focus {
   }
 
   .input-group input {
-    width: 80%;
+    width: 20%;
   }
 }
