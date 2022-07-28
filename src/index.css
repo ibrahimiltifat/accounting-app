@@ -251,7 +251,35 @@ input:focus {
   margin: 10px 0;
 }
 
+.col-headings{
+  display: flex;
+}
+.col-desc{
+  flex: 1;
+  width:20%;
+  
+}
+.col-amount{
+  flex: 1;
+}
+.col-date{
+  flex: 1;
+}
+.col-icon{
+  flex: 1;
+}
+
 @media (max-width: 600px) {
+  
+  /*todo- remove container heading  */
+.col-headings h2{
+  font-size: 12px;
+}
+
+.card{
+  padding: 0px 0px ;
+}
+  
   .rating li {
     margin: 10px 3px;
   }
