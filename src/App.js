@@ -4,6 +4,7 @@ import AddPrice from "./pages/AddPrice";
 import db from "./Firebase";
 import React, { useState, useEffect } from "react";
 import firebase from "./Firebase";
+import Testpage from "./pages/Testpage";
 function App() {
   const ref = firebase.firestore().collection("developers");
   console.log(ref);
@@ -11,8 +12,9 @@ function App() {
     <>
       <Header />
       <div className="container">
-        <AddPrice />
+        {/* <AddPrice /> */}
         {/* <AddCategory /> */}
+        <Testpage/>
       </div>
     </>
   );
