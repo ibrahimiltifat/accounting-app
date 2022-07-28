@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 
 function Testpage() {
-  
-  const data=[
-  {
-    desc:"aa",
-    amount:25,
-    date:"25/7/2022"
-  },
-  {
-    desc:"this is a nicerr descr",
-    amount:25000,
-    date:"25/10/201"
-  },
-    ]     
+  const data = [
+    {
+      desc: "aa",
+      amount: 25,
+      date: "25/7/2022",
+    },
+    {
+      desc: "this is a nicer",
+      amount: 25000,
+      date: "25/10/201",
+    },
+  ];
   const [categories, setCategories] = useState([]);
   const [message, SetMessage] = useState("");
   const [newCategory, SetNewCategory] = useState("");
@@ -65,14 +64,14 @@ function Testpage() {
             <h2 className="col-date">Date</h2>
             <h2 className="col-icon">xx</h2>
           </div>
-        {data.map((item, index) => (
-        <div className="col-headings" key={index}>
-        <h2 className="col-desc" >{item.desc}</h2>
-        <h2 className="col-amount" >{item.amount}</h2>
-        <h2 className="col-date" >{item.date}</h2>
-        <h2 className="col-date">xx</h2>
-        </div>
-            ))}
+          {data.map((item, index) => (
+            <div className="col-headings" key={index}>
+              <h2 className="col-desc">{item.desc}</h2>
+              <h2 className="col-amount">{item.amount}</h2>
+              <h2 className="col-date">{item.date}</h2>
+              <h2 className="col-date">xx</h2>
+            </div>
+          ))}
         </div>
       </div>
     </>
