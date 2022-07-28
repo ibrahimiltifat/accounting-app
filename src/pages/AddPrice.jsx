@@ -38,8 +38,9 @@ function AddPrice() {
     <>
       <div className="container">
         <div className="card ">
-          {/* Todo add navbar on top */}
-          {/* <Navbar /> */}
+
+          
+          <Navbar />
           <h2>ENTER A CATEGORY</h2>
           <div className="input-group">
             <input

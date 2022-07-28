@@ -29,6 +29,7 @@ function AddCategory() {
     <>
       <div className="container">
         <div className="card">
+          <Navbar />
           <form onSubmit={handleSubmit}>
             <h2>ENTER A NEW CATEGORY</h2>
             <div className="input-group">

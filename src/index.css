@@ -23,6 +23,17 @@ ul {
   padding: 0 20px;
 }
 
+.Navbar {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  margin-bottom: 1rem;
+}
+
+.Navbar-text {
+  color: rebeccapurple;
+  cursor: pointer;
+}
 header {
   height: 70px;
   width: 100%;
@@ -38,9 +49,19 @@ header {
   padding: 40px 50px;
   margin: 20px 0;
   position: relative;
+  max-height: 90vh;
+  overflow-y: scroll;
+  /* overflow-y: hidden; */
+}
+::-webkit-scrollbar {
+  display: none;
 }
 .text-center {
   text-align: center;
+}
+.list-heading {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card.reverse {
@@ -212,6 +233,10 @@ input:focus {
 .about-link a {
   color: #fff;
   cursor: pointer;
+}
+.Navbar a {
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .about-link a:hover {
