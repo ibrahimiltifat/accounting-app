@@ -1,6 +1,6 @@
 export const data = [
   {
-    desc: "dummy data",
+    desc: "dummy datasa",
     amount: 250,
     date: "25/7/2022",
   },

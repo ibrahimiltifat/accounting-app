@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import { collection, getDocs,doc, getDoc,query,setDoc } from "firebase/firestore"; 
+import db from "../Firebase";
 
 function AddPrice() {
   const [weightsArray, setWeightsArray] = useState([]);
-  const [categories, setCategories] = useState(["a", "b", "c"]);
+  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
   const [formValues, setFormValues] = useState([{ name: "", email: "" }]);
@@ -15,6 +17,20 @@ function AddPrice() {
       setMessage("");
     }
   }, [category]);
+  
+  useEffect(() => {
+    
+    const getCategories = async () => {
+      console.log("loading categories")
+      const q = query(collection(db, "categories"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+          categories.push(doc.id)
+          console.log(doc.id, " => ", doc.data());
+        });
+      }
+      getCategories();
+  },[]);
 
   let handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -30,7 +46,7 @@ function AddPrice() {
 
   let handleSubmit = (event) => {
     event.preventDefault();
-
+    setCategory("");
     setFormValues([{ name: "", email: "" }]);
   };
 
@@ -47,6 +63,7 @@ function AddPrice() {
               onChange={(e) => setCategory(e.target.value)}
               type="text"
               placeholder="Enter a Category"
+              value={category}
               //   value={newCategory}
             />
           </div>
