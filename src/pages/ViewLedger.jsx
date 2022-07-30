@@ -1,39 +1,86 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { data } from "../data";
 import { FaTrash } from "react-icons/fa";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+  addDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import db from "../Firebase";
 
 function ViewLedger() {
-  
-  const [categories, setCategories] = useState(data);
+  const [sum, setSum] = useState();
+  const [testCategories, setTestCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [message, SetMessage] = useState("");
   const [newCategory, SetNewCategory] = useState("");
+
+  useEffect(() => {
+    const getCategories = async () => {
+      console.log("loading categories");
+      const q = query(collection(db, "categories"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        testCategories.push(doc.id);
+        console.log(doc.id);
+      });
+    };
+    getCategories();
+  }, []);
 
   const handleTextChange = (e) => {
     SetNewCategory(e.target.value);
   };
-  const deleteValue = (index,e) => {
+  const deleteValue = async (item) => {
     alert("Are you sure you want to delete this ?");
-    data.splice(index,1);
-    categories.splice(index,1);
-    console.log(index)
+    await deleteDoc(doc(db, newCategory, item[0]));
+    console.log("deleted");
+    setData();
   };
-  
+
+  const calSum = (add) => {
+    let total = 0;
+    add.forEach((item) => (total += Number(item[1].amount)));
+    // categories.forEach((item) => (total += 5));
+    console.log(total);
+    setSum(total);
+  };
+
+  const setData = async () => {
+    console.log(newCategory);
+    const add = [];
+    const q = query(collection(db, newCategory));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      add.push([doc.id, doc.data()]);
+    });
+    setCategories(add);
+    calSum(add);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newCategory.length === 0) {
-      SetMessage("Please enter a valid Category");
-    } else {
-      if (categories.includes(newCategory)) {
-        SetMessage("Category already present");
-      } else {
-        SetMessage("");
-        setCategories([newCategory, ...categories]);
-      }
-      console.log(categories);
-      SetNewCategory("");
-    }
+    setData();
+    // if (newCategory.length === 0) {
+    //   SetMessage("Please enter a valid Category");
+    // } else {
+    //   if (categories.includes(newCategory)) {
+    //     SetMessage("Category already present");
+    //   } else {
+    //     SetMessage("");
+    //     setCategories([newCategory, ...categories]);
+    //   }
+    //   console.log(categories);
+    //   SetNewCategory("");
+    // }
   };
 
   return (
@@ -56,7 +103,7 @@ function ViewLedger() {
                 submit
               </button>
             </div>
-            {message && <div className="message">{message}</div>}
+            {/* {message && <div className="message">{message}</div>} */}
           </form>
           <div className="col-headings">
             <p className="col-desc">Description</p>
@@ -67,20 +114,27 @@ function ViewLedger() {
           <div className="overflow">
             {categories.map((item, index) => (
               <div className="col-headings" key={index}>
-                <p className="col-desc">{item.desc}</p>
-                <p className="col-amount">{item.amount}</p>
-                <p className="col-date">{item.date}</p>
-                <FaTrash className="col-icon" color="#C90000" onClick={(e) => deleteValue(index, e)}/>
+                <p className="col-desc">{item[1].description}</p>
+                <p className="col-amount">{item[1].amount}</p>
+                {/* <p className="col-date">{item.date}</p> */}
+                <p className="col-date">21/11/2022</p>
+                <FaTrash
+                  className="col-icon"
+                  color="#C90000"
+                  onClick={(e) => deleteValue(item)}
+                />
               </div>
             ))}
           </div>
           {/* todo SUM */}
-          {/* <div className="col-headings">
-            <p className="col-desc">Description</p>
-            <p className="col-amount">Amount</p>
-            <p className="col-date">Date</p>
-            <p className="col-icon">xx</p>
-          </div> */}
+          {sum && (
+            <div className="col-sum-container">
+              <p className="col-sum"> Sum</p>
+              <p className="col-sum">{sum}</p>
+              <p className="col-date"></p>
+              <p className="col-icon"></p>
+            </div>
+          )}
         </div>
       </div>
     </>

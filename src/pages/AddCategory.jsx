@@ -1,37 +1,37 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { collection, getDocs,doc, getDoc,query,setDoc } from "firebase/firestore"; 
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import db from "../Firebase";
 
-
-
 function AddCategory() {
-
   const [categories, setCategories] = useState([]);
   const [message, SetMessage] = useState("");
   const [newCategory, SetNewCategory] = useState("");
 
-
-  
-  useEffect(()=>{
+  useEffect(() => {
     const getCategories = async (newCat) => {
-    const q = query(collection(db, "categories"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      categories.push(doc.id)
+      const q = query(collection(db, "categories"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        categories.push(doc.id);
         console.log(doc.id, " => ", doc.data());
       });
-    }
+    };
     getCategories();
-  },[])
+  }, []);
 
   const addCategory = async (newCat) => {
     const citiesRef = collection(db, "categories");
     await setDoc(doc(citiesRef, newCategory), {});
-   
-  }
-
-
+    console.log("donee");
+  };
 
   const handleTextChange = (e) => {
     SetNewCategory(e.target.value);
@@ -48,7 +48,7 @@ function AddCategory() {
         setCategories([newCategory, ...categories]);
         addCategory();
       }
-      console.log("categories",[categories]);
+      console.log("categories", [categories]);
       SetNewCategory("");
     }
   };

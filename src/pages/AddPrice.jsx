@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { collection, getDocs,doc, getDoc,query,setDoc } from "firebase/firestore"; 
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
 import db from "../Firebase";
+import { testData } from "../data";
+import { async } from "@firebase/util";
 
 function AddPrice() {
   const [weightsArray, setWeightsArray] = useState([]);
@@ -17,20 +27,19 @@ function AddPrice() {
       setMessage("");
     }
   }, [category]);
-  
+
   useEffect(() => {
-    
     const getCategories = async () => {
-      console.log("loading categories")
+      console.log("loading categories");
       const q = query(collection(db, "categories"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-          categories.push(doc.id)
-          console.log(doc.id, " => ", doc.data());
-        });
-      }
-      getCategories();
-  },[]);
+        categories.push(doc.id);
+        console.log(doc.id);
+      });
+    };
+    getCategories();
+  }, []);
 
   let handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -44,18 +53,26 @@ function AddPrice() {
     setFormValues([...formValues, { name: "", email: "" }]);
   };
 
-  let handleSubmit = (event) => {
+  let handleSubmit = async (event) => {
     event.preventDefault();
     setCategory("");
+    console.log(category);
     setFormValues([{ name: "", email: "" }]);
+    const citiesRef = collection(db, category);
+    formValues.forEach(async (tuple) => {
+      await setDoc(doc(citiesRef), {
+        description: tuple.name,
+        amount: tuple.email,
+      });
+    });
+
+    console.log("written");
   };
 
   return (
     <>
       <div className="container">
         <div className="card ">
-
-          
           <Navbar />
           <h2>ENTER A CATEGORY</h2>
           <div className="input-group">

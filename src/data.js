@@ -70,3 +70,7 @@ export const data = [
     date: "25/7/2022",
   },
 ];
+
+export const testData = {
+  amount: "1",
+};
