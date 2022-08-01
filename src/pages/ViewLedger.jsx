@@ -97,6 +97,18 @@ function ViewLedger() {
                 placeholder="Enter a Category"
                 value={newCategory}
               />
+              </div>
+              <div className="form-select-container">
+              <select class="form-select">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="3">Three</option>
+                <option value="3">Three</option>
+                <option value="3">Three</option>
+                <option value="3">Three</option>
+              </select>
             </div>
             <div className="text-center">
               <button className="btn btn-primary" type="submit">
