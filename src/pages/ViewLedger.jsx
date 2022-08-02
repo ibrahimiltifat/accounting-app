@@ -19,7 +19,7 @@ function ViewLedger() {
   const [testCategories, setTestCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [message, SetMessage] = useState("");
-  const [newCategory, SetNewCategory] = useState("this is");
+  const [newCategory, SetNewCategory] = useState("");
 
   useEffect(() => {
     const getCategories = async () => {
