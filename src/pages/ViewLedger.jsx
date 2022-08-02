@@ -42,6 +42,7 @@ function ViewLedger() {
   },[categories])
 
   const handleTextChange = (e) => {
+    console.log("setting")
     SetNewCategory(e.target.value);
   };
   const deleteValue = async (item) => {
@@ -62,6 +63,7 @@ function ViewLedger() {
   const setData = async () => {
     console.log(newCategory);
     const add = [];
+    console.log("aaaa",newCategory)
     const q = query(collection(db, newCategory));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -108,6 +110,7 @@ function ViewLedger() {
               </div> */}
               <div className="form-select-container">
                 <select className="form-select" onChange={handleTextChange} value={newCategory}>
+                  <option selected>Select an option</option>
                 {testCategories.map((item, index) => (
                    <option >{item}</option> 
                 ))}
