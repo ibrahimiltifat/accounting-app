@@ -37,6 +37,10 @@ function ViewLedger() {
     console.log(testCategories);
   }, []);
 
+  useEffect(()=>{
+    calSum(categories);
+  },[categories])
+
   const handleTextChange = (e) => {
     SetNewCategory(e.target.value);
   };
@@ -66,7 +70,7 @@ function ViewLedger() {
       add.push([doc.id, doc.data()]);
     });
     setCategories(add);
-    calSum(add);
+    // calSum(add);
   };
 
   const handleSubmit = (e) => {
