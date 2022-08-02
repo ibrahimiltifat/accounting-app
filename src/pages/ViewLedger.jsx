@@ -19,19 +19,22 @@ function ViewLedger() {
   const [testCategories, setTestCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [message, SetMessage] = useState("");
-  const [newCategory, SetNewCategory] = useState("");
+  const [newCategory, SetNewCategory] = useState("this is");
 
   useEffect(() => {
     const getCategories = async () => {
+      let add= []
       console.log("loading categories");
       const q = query(collection(db, "categories"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        testCategories.push(doc.id);
+        add.push(doc.id);
         console.log(doc.id);
       });
+      setTestCategories(add);
     };
     getCategories();
+    console.log(testCategories);
   }, []);
 
   const handleTextChange = (e) => {
@@ -68,6 +71,7 @@ function ViewLedger() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(newCategory);
     setData();
     // if (newCategory.length === 0) {
     //   SetMessage("Please enter a valid Category");
@@ -90,26 +94,21 @@ function ViewLedger() {
           <Navbar />
           <form onSubmit={handleSubmit}>
             <h2>ENTER A NEW CATEGORY</h2>
-            <div className="input-group">
+            {/* <div className="input-group">
               <input
                 onChange={handleTextChange}
                 type="text"
                 placeholder="Enter a Category"
                 value={newCategory}
               />
-              </div>
+              </div> */}
               <div className="form-select-container">
-              <select class="form-select">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="3">Three</option>
-                <option value="3">Three</option>
-                <option value="3">Three</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
+                <select className="form-select" onChange={handleTextChange} value={newCategory}>
+                {testCategories.map((item, index) => (
+                   <option >{item}</option> 
+                ))}
+                </select>
+              </div>
             <div className="text-center">
               <button className="btn btn-primary" type="submit">
                 submit

@@ -299,7 +299,7 @@ input:focus {
   height: 50px;
   border-color: gray;
   border-radius: 10px;
-  color: gray;
+  color: black;
 }
 .form-select-container{
   display: flex;
